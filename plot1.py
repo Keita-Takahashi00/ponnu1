@@ -1,5 +1,5 @@
-pip install streamlit as st
-pip install pandas as pd
+import streamlit as st
+import pandas as pd
 
 # Load the JSON file
 json_file = "./dm.json"
