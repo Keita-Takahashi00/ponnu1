@@ -1,4 +1,4 @@
-oip install streamlit as st
+pip install streamlit as st
 pip install pandas as pd
 
 # Load the JSON file
