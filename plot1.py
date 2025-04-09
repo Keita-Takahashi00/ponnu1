@@ -8,4 +8,5 @@ json_file = "./dm.json"
 df = pd.read_json(json_file)
 
 # Display the DataFrame
-print(df)
+st.markdown("## - _DM domain_")
+st.write(df)
