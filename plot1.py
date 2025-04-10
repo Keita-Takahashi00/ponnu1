@@ -35,3 +35,41 @@ vsdf['DATE'] = pd.to_datetime(vsdf['DATE'], errors='coerce').dt.strftime('%Y%m%d
 # Example: Display the dm_df DataFrame in the Streamlit app
 st.markdown("## - _DataFrame_")
 st.write(vsdf)
+
+import plotly.express as px
+# Streamlit app
+st.title("Visualization of Subjects Over Time")
+
+# Allow user to filter by subject (USUBJID)
+selected_subjects = st.multiselect("Select Subjects (USUBJID):", options=vsdf['USUBJID'].unique(), default=vsdf['USUBJID'].unique())
+
+# Filter data based on selected subjects
+filtered_vsdf = vsdf[vsdf['USUBJID'].isin(selected_subjects)]
+
+# Create scatter plot with Plotly
+fig = px.scatter(
+    filtered_vsdf,
+    x='DATE',
+    y='USUBJID',
+    text='TEXT',
+    title="Visualization of Subjects Over Time",
+    labels={"USUBJID": "Subjects", "DATE": "Date"},
+    template="plotly_white"
+)
+
+# Display text labels on the scatter plot
+fig.update_traces(textposition='top center')
+
+# Add x-axis and y-axis titles
+fig.update_layout(
+    xaxis_title="Date",
+    yaxis_title="Subjects",
+    showlegend=False
+)
+
+# Display the plot in Streamlit
+st.plotly_chart(fig)
+
+# Display the filtered DataFrame
+st.markdown("### Filtered Data")
+st.dataframe(filtered_vsdf)
