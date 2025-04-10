@@ -24,7 +24,7 @@ sv_df = dataframes["sv"]
 
 # Example: Display the dm_df DataFrame in the Streamlit app
 #st.markdown("## - _DM DataFrame_")
-#st.write(dm_df)
+st.write(sv_df)
 
 # Create a new DataFrame with selected columns and rename 'sestdtc' to 'date'
 df = sv_df[['usubjid', 'visit', 'sestdtc']].rename(columns={'sestdtc': 'date'})
