@@ -23,8 +23,8 @@ se_df = dataframes["se"]
 sv_df = dataframes["sv"]
 
 # Example: Display the dm_df DataFrame in the Streamlit app
-st.markdown("## - _DM DataFrame_")
-st.write(dm_df)
+#st.markdown("## - _DM DataFrame_")
+#st.write(dm_df)
 
 # Create a new DataFrame with selected columns and rename 'sestdtc' to 'date'
 df = sv[['usubjid', 'visit', 'sestdtc']].rename(columns={'sestdtc': 'date'})
@@ -32,4 +32,6 @@ df = sv[['usubjid', 'visit', 'sestdtc']].rename(columns={'sestdtc': 'date'})
 # Convert 'date' column to numeric (YYYYMMDD format)
 df['date'] = pd.to_datetime(df['date'], errors='coerce').dt.strftime('%Y%m%d').astype(float)
 
-print(df)
+# Example: Display the dm_df DataFrame in the Streamlit app
+st.markdown("## - _DataFrame_")
+st.write(df)
