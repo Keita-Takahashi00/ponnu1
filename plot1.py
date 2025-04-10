@@ -30,7 +30,7 @@ st.write(sv_df)
 vsdf = sv_df[['USUBJID', 'VISIT', 'SVSTDTC']].rename(columns={'SVSTDTC': 'DATE', 'VISIT': 'TEXT'})
 
 # Convert 'date' column to numeric (YYYYMMDD format)
-vsdf['DATE'] = pd.to_datetime(df['DATE'], errors='coerce').dt.strftime('%Y%m%d').astype(float)
+vsdf['DATE'] = pd.to_datetime(vsdf['DATE'], errors='coerce').dt.strftime('%Y%m%d').astype(float)
 
 # Example: Display the dm_df DataFrame in the Streamlit app
 st.markdown("## - _DataFrame_")
