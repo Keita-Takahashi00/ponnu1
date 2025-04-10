@@ -27,7 +27,7 @@ sv_df = dataframes["sv"]
 st.write(sv_df)
 
 # Create a new DataFrame with selected columns and rename 'sestdtc' to 'date'
-df = sv_df[['USUBJID', 'VISIT', 'SESTDTC']].rename(columns={'SESTDTC': 'DATE'})
+df = sv_df[['USUBJID', 'VISIT', 'SVSTDTC']].rename(columns={'SVSTDTC': 'DATE'})
 
 # Convert 'date' column to numeric (YYYYMMDD format)
 df['DATE'] = pd.to_datetime(df['DATE'], errors='coerce').dt.strftime('%Y%m%d').astype(float)
