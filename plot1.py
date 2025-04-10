@@ -1,13 +1,5 @@
 import streamlit as st
 import pandas as pd
-import subprocess
-import sys
-
-# Ensure Plotly is installed
-try:
-    import plotly
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "plotly"])
 
 # List of CSV files
 files = ["dm", "ds", "se", "sv"]
@@ -44,7 +36,8 @@ vsdf['DATE'] = pd.to_datetime(vsdf['DATE'], errors='coerce').dt.strftime('%Y%m%d
 st.markdown("## - _DataFrame_")
 st.write(vsdf)
 
-import plotly.express as px
+import matplotlib.pyplot as plt
+
 # Streamlit app
 st.title("Visualization of Subjects Over Time")
 
@@ -54,29 +47,26 @@ selected_subjects = st.multiselect("Select Subjects (USUBJID):", options=vsdf['U
 # Filter data based on selected subjects
 filtered_vsdf = vsdf[vsdf['USUBJID'].isin(selected_subjects)]
 
-# Create scatter plot with Plotly
-fig = px.scatter(
-    filtered_vsdf,
-    x='DATE',
-    y='USUBJID',
-    text='TEXT',
-    title="Visualization of Subjects Over Time",
-    labels={"USUBJID": "Subjects", "DATE": "Date"},
-    template="plotly_white"
-)
+# Create a scatter plot using Matplotlib
+fig, ax = plt.subplots(figsize=(10, 6))
 
-# Display text labels on the scatter plot
-fig.update_traces(textposition='top center')
+# Plot data for each subject
+for subject in filtered_vsdf['USUBJID'].unique():
+    subject_data = filtered_vsdf[filtered_vsdf['USUBJID'] == subject]
+    ax.scatter(subject_data['DATE'], [subject] * len(subject_data), label=subject)
+    for _, row in subject_data.iterrows():
+        ax.text(row['DATE'], subject, row['TEXT'], fontsize=9, ha='right')
 
-# Add x-axis and y-axis titles
-fig.update_layout(
-    xaxis_title="Date",
-    yaxis_title="Subjects",
-    showlegend=False
-)
+# Customize the plot
+ax.set_title("Subjects Over Time", fontsize=16)
+ax.set_xlabel("Date", fontsize=14)
+ax.set_ylabel("Subjects (USUBJID)", fontsize=14)
+ax.set_yticks(filtered_vsdf['USUBJID'].unique())
+ax.grid(True)
+ax.legend(title="Subjects", loc='upper left', bbox_to_anchor=(1, 1))
 
 # Display the plot in Streamlit
-st.plotly_chart(fig)
+st.pyplot(fig)
 
 # Display the filtered DataFrame
 st.markdown("### Filtered Data")
