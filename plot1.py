@@ -27,10 +27,10 @@ sv_df = dataframes["sv"]
 st.write(sv_df)
 
 # Create a new DataFrame with selected columns and rename 'sestdtc' to 'date'
-df = sv_df[['usubjid', 'visit', 'sestdtc']].rename(columns={'sestdtc': 'date'})
+df = sv_df[['USUBJID', 'VISIT', 'SESTDTC']].rename(columns={'SESTDTC': 'DATE'})
 
 # Convert 'date' column to numeric (YYYYMMDD format)
-df['date'] = pd.to_datetime(df['date'], errors='coerce').dt.strftime('%Y%m%d').astype(float)
+df['DATE'] = pd.to_datetime(df['DATE'], errors='coerce').dt.strftime('%Y%m%d').astype(float)
 
 # Example: Display the dm_df DataFrame in the Streamlit app
 st.markdown("## - _DataFrame_")
