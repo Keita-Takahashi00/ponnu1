@@ -1,6 +1,13 @@
-pip install plotly
 import streamlit as st
 import pandas as pd
+import subprocess
+import sys
+
+# Ensure Plotly is installed
+try:
+    import plotly
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "plotly"])
 
 # List of CSV files
 files = ["dm", "ds", "se", "sv"]
