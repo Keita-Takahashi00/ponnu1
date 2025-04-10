@@ -4,14 +4,17 @@ import pandas as pd
 # List of CSV files
 files = ["dm", "ds", "se", "sv"]
 
+# Dictionary to store DataFrames
+dataframes = {}
+
 # Iterate through the list of files
 for file in files:
-    # Create a DataFrame
-    file+"_df" = pd.read_csv(file+".csv")
+    # Create a DataFrame and store it in the dictionary
+    dataframes[file] = pd.read_csv(file + ".csv")
 
     # Display the DataFrame with a title
-    st.markdown(f"## - _{file.split('.')[0].upper()} domain_")
-    st.write(df)
+    st.markdown(f"## - _{file.upper()} domain_")
+    st.write(dataframes[file])
 
 # Create a new DataFrame with selected columns and rename 'sestdtc' to 'date'
 df = sv_df[['usubjid', 'visit', 'sestdtc']].rename(columns={'sestdtc': 'date'})
