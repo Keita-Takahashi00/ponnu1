@@ -12,3 +12,4 @@ for csv_file in csv_files:
     # Display the DataFrame with a title
     st.markdown(f"## - _{csv_file.split('.')[0].upper()} domain_")
     st.write(df)
+
