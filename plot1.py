@@ -2,15 +2,15 @@ import streamlit as st
 import pandas as pd
 
 # List of CSV files
-csv_files = ["dm.csv", "ds.csv", "se.csv", "sv.csv"]
+files = ["dm", "ds", "se", "sv"]
 
 # Iterate through the list of files
-for csv_file in csv_files:
+for file in files:
     # Create a DataFrame
-    df = pd.read_csv(csv_file)
+    file+"_df" = pd.read_csv(file+".csv")
 
     # Display the DataFrame with a title
-    st.markdown(f"## - _{csv_file.split('.')[0].upper()} domain_")
+    st.markdown(f"## - _{file.split('.')[0].upper()} domain_")
     st.write(df)
 
 # Create a new DataFrame with selected columns and rename 'sestdtc' to 'date'
